@@ -9,22 +9,25 @@
 class DB
 {
     protected $db;
+
     public function __construct()
     {
         global $config;
-        $this->db = new mysqli($config['db_host'],$config['db_user'],$config['db_pwd'],$config['db_database']);
+        $this->db = new mysqli($config['db_host'], $config['db_user'], $config['db_pwd'], $config['db_database']);
     }
 
-    /**
-     * @return mysqli
-     */
-    public function getDb()
+
+    public function query($sql)
     {
-        return $this->db;
+        try {
+            return $this->db->query($sql);
+
+        } catch (Exception $e) {
+            echo $e;
+            return false;
+        }
+
     }
-
-
-
 
 
 }

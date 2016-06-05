@@ -6,7 +6,9 @@
  * Time: 11:00 PM
  * Desc:website entry
  */
+session_start();
 require 'Router.class.php';
+
 
 if(isset($_GET['route'])){
     $path = $_GET['route'];
@@ -14,7 +16,3 @@ if(isset($_GET['route'])){
     $path = '/';
 }
 $router = new Router($path);
-
-//$router->push();
-
-

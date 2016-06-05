@@ -6,22 +6,31 @@
  * Date: 26/05/16
  * Time: 3:14 PM
  */
-class User extends DB
+require_once 'model/Model.class.php';
+class User extends Model
 {
+    protected $table = "user";
     private $username;
     private $password;
     private $authority;
 
-    public function __construct($id)
+    /*
+     * return:0 wrong passwork
+     *        1 user
+     *        2 admin
+     * */
+    public function verify($username, $password)
     {
+        $password = md5($password);
+        $sql = "select * from $this>table where username=$username and password=$password";
+        $result = $this->db->query($sql);
+        if(!empty($result)){
+            $data = mysqli_fetch_array($result);
+            return $data['authority'];
+        }else{
+            return 0;
+        }
 
-    }
-
-    public function __construct()
-    {
-    }
-
-    public function create($array){
 
     }
 

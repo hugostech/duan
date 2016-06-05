@@ -8,7 +8,9 @@
  * Desc:Handle the request
  */
 require 'controller/PublicController.php';
-class Router
+require 'controller/Auth.php';
+require 'lib/RoutorTool.class.php';
+class Router extends RoutorTool
 {
     protected $controller;
     public function __construct($path)
@@ -21,17 +23,13 @@ class Router
             case 'contactus':
                 self::blind('PublicController','contactus');
                 break;
-
-
+            case 'register':
+                self::blind('Auth','register');
+                break;
         }
 
 
     }
 
-    private function blind($controller,$functionName){
-        $this->controller = new $controller();
-        $this->controller->$functionName();
-        return true;
-    }
 
 }
